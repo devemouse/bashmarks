@@ -30,7 +30,7 @@
 # p b[TAB] - tab completion is available
 # d bookmarkname - deletes the bookmark
 # d [TAB] - tab completion is available
-# l - list all bookmarks
+# g - list all bookmarks
 
 # setup file to store bookmarks
 if [ ! -n "$SDIRS" ]; then
@@ -45,7 +45,12 @@ function s {
 
 # jump to bookmark
 function g {
-    _bashmarks_check_help $@ || _bashmarks_go $@
+   if [ -z $1 ]; then
+      _bashmarks_list $@
+   else
+
+      _bashmarks_check_help $@ || _bashmarks_go $@
+   fi
 }
 
 # print bookmark
@@ -59,9 +64,9 @@ function d {
 }
 
 # list bookmarks with dirname
-function l {
-    _bashmarks_check_help $@ || _bashmarks_list $@
-}
+# function l {
+#   _bashmarks_check_help $@ || _bashmarks_list $@
+# }
 
 # print out help for the forgetful
 function _bashmarks_check_help {

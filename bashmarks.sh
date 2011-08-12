@@ -40,7 +40,12 @@ touch $SDIRS
 
 # save current directory to bookmarks
 function s {
+   if [ -z $1 ]; then
+      echo 'bookmark name required'
+      _bashmarks_list $@
+   else
     _bashmarks_check_help $@ || _bashmarks_save $@
+   fi
 }
 
 # jump to bookmark
@@ -48,19 +53,27 @@ function g {
    if [ -z $1 ]; then
       _bashmarks_list $@
    else
-
       _bashmarks_check_help $@ || _bashmarks_go $@
    fi
 }
 
 # print bookmark
 function p {
+   if [ -z $1 ]; then
+      _bashmarks_list $@
+   else
     _bashmarks_check_help $@ || _bashmarks_print $@
+ fi
 }
 
 # delete bookmark
 function d {
+   if [ -z $1 ]; then
+      echo 'bookmark name required'
+      _bashmarks_list $@
+   else
     _bashmarks_check_help $@ || _bashmarks_delete $@
+ fi
 }
 
 # list bookmarks with dirname
